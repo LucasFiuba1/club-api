@@ -18,3 +18,34 @@ def get_socio_by_id(socio_id):
             return cursor.fetchone()
     finally: 
         connection.close()
+
+def update_socio(socio_id, data):
+    connection = get_connection()
+
+    try:
+        keys = []
+        values = []
+
+        for key, value in data.items():
+            keys.append(f"{key} = %s")
+            values.append(value)
+
+        with connection.cursor() as cursor:
+
+            query = f"""
+                UPDATE socios 
+                SET {", " .join(keys)}
+                WHERE id = %s
+            """
+
+            values.append(socio_id)
+
+            cursor.execute(query, values)
+
+            connection.commit()
+
+            socio_actualizado = get_socio_by_id(socio_id)
+            
+            return socio_actualizado
+    finally:
+        connection.close()
