@@ -13,7 +13,25 @@ def get_socio_by_id(socio_id):
                 WHERE id = %s", 
             """
 
-            cursor.execute(query, socio_id)
+            cursor.execute(query, (socio_id,))
+            
+            return cursor.fetchone()
+    finally: 
+        connection.close()
+
+def get_socio_by_email(socio_email):
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+
+            query = """
+                SELECT id, email, nombre, activo 
+                FROM socios 
+                WHERE email = %s", 
+            """
+
+            cursor.execute(query, (socio_email,))
             
             return cursor.fetchone()
     finally: 
@@ -45,7 +63,7 @@ def update_socio(socio_id, data):
             connection.commit()
 
             socio_actualizado = get_socio_by_id(socio_id)
-            
+
             return socio_actualizado
     finally:
         connection.close()
