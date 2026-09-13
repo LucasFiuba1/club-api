@@ -10,7 +10,7 @@ def get_socio_by_id(socio_id):
             query = """
                 SELECT id, email, nombre, activo 
                 FROM socios 
-                WHERE id = %s", 
+                WHERE id = %s
             """
 
             cursor.execute(query, (socio_id,))
@@ -29,7 +29,7 @@ def get_socio_by_email(socio_email):
             query = """
                 SELECT id, email, nombre, activo 
                 FROM socios 
-                WHERE email = %s", 
+                WHERE email = %s 
             """
 
             cursor.execute(query, (socio_email,))
@@ -63,9 +63,5 @@ def update_socio(socio_id, data):
             cursor.execute(query, values)
 
             connection.commit()
-
-            socio_actualizado = get_socio_by_id(socio_id)
-
-            return socio_actualizado
     finally:
         connection.close()
