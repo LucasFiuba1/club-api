@@ -14,10 +14,10 @@ def validate_update_socio(socio_id, data):
         return False, "El cuerpo no puede estar vacío."
 
     unknown_fields = set(data.keys()) - ALLOWED_FIELDS
-
+    
     if unknown_fields:
         return False, {
-            f"Campos desconocidos: {", ".join(unknown_fields)}"
+            f"Campos desconocidos: {', '.join(unknown_fields)}"
         }, 400
 
     if "nombre" in data:

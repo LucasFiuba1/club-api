@@ -14,10 +14,11 @@ def get_socio_by_id(socio_id):
             """
 
             cursor.execute(query, (socio_id,))
-            
+
             return cursor.fetchone()
-    finally: 
+    finally:
         connection.close()
+
 
 def get_socio_by_email(socio_email):
     connection = get_connection()
@@ -32,10 +33,11 @@ def get_socio_by_email(socio_email):
             """
 
             cursor.execute(query, (socio_email,))
-            
+
             return cursor.fetchone()
-    finally: 
+    finally:
         connection.close()
+
 
 def update_socio(socio_id, data):
     connection = get_connection()
