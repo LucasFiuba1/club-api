@@ -1,6 +1,8 @@
 from flask import Flask
+from routes.canchas.cancha_routes import cancha_routes
 
 app = Flask(__name__)
+app.register_blueprint(cancha_routes)
 
 @app.get("/")
 def home():
