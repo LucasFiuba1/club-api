@@ -1,6 +1,6 @@
 from flask import Flask
 from routes.canchas.cancha_routes import cancha_routes
-from routes.socios import socio_routes
+from routes.socios.socio_routes import socio_routes
 
 
 
@@ -9,7 +9,7 @@ def create_app():
 
     app.register_blueprint(socio_routes)
     app.register_blueprint(cancha_routes)
-    
+
     return app
 
 
