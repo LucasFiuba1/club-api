@@ -38,3 +38,28 @@ VALUES
         ('Cancha de Pádel 3', 3, 700000, TRUE, TRUE),
         ('Cancha de Pádel 3', 3, 650000, FALSE, FALSE)
     );
+
+-----------------    
+/* SOCIOS */
+CREATE TABLE
+    socios (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nombre VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        activo BOOLEAN NOT NULL DEFAULT TRUE,
+    );
+
+INSERT INTO
+    TABLE socios (nombre, email, activo)
+VALUES
+    (
+        (
+            'Lucas Cirillo Berardi',
+            'lucascirilloberardi@gmail.com',
+            TRUE
+        ),
+        ('Joaquin', 'joaquin@gmail.com', TRUE),
+        ('Marteo', 'mateo@gmail.com', FALSE),
+        ('Roman', 'roman@gmail.com', TRUE),
+        ('Sergio', 'sergio@gmail.com', TRUE)
+    );
