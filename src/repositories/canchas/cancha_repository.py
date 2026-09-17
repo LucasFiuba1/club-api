@@ -122,4 +122,3 @@ def update_cancha(id_cancha, data):
         connection.close()
 
 
-

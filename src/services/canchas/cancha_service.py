@@ -57,4 +57,3 @@ def delete_cancha_service(id_cancha):
 
     delete_cancha(id_cancha)
     return None, 204
-
