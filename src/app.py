@@ -1,12 +1,19 @@
 from flask import Flask
 from routes.canchas.cancha_routes import cancha_routes
+from routes.socios import socio_routes
 
-app = Flask(__name__)
-app.register_blueprint(cancha_routes)
 
-@app.get("/")
-def home():
-    return {"status": "ok"}
+
+def create_app():
+    app = Flask(__name__)
+
+    app.register_blueprint(socio_routes)
+    app.register_blueprint(cancha_routes)
+    
+    return app
+
+
+app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True)
