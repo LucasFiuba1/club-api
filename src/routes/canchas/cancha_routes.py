@@ -21,7 +21,7 @@ def patch_cancha_route(id_cancha):
 
     if error:
         return jsonify(error), status
-    return "", status                              
+    return "", status
 
 @cancha_routes.delete("/<int:id_cancha>")
 def delete_cancha_route(id_cancha):

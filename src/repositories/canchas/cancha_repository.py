@@ -26,7 +26,7 @@ def create_cancha(data):
                 INSERT INTO canchas (
                 nombre, id_deporte, precio_hora, techada, activa
             )
-            VALUES (%s, %s, %s, %s, %s)    
+            VALUES (%s, %s, %s, %s, %s)
 
             """
             cursor.execute(
@@ -37,7 +37,7 @@ def create_cancha(data):
                     data["precio_hora"],
                     data["techada"],
                     data["activa"]
-            
+
                 )
             )
 
@@ -45,7 +45,7 @@ def create_cancha(data):
 
         connection.commit()
         return cancha_id
-    
+
     finally:
         connection.close()
 
@@ -59,7 +59,7 @@ def get_cancha_by_id(id_cancha):
                 FROM canchas
                 WHERE id = %s
             """
-            
+
             cursor.execute(query, (id_cancha,))
             result = cursor.fetchone()
             return result
@@ -108,7 +108,7 @@ def update_cancha(id_cancha, data):
         for key, value in data.items():
             keys.append(f"{key} = %s")
             values.append(value)
-            
+
         with connection.cursor() as cursor:
             query = f"""
                 UPDATE canchas
@@ -123,4 +123,3 @@ def update_cancha(id_cancha, data):
 
 
 
-          

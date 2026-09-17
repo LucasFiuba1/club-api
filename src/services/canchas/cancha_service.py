@@ -17,10 +17,10 @@ def create_cancha_service(data):
     data ["activa"] = activa
 
     deporte = get_deporte_by_id(data["id_deporte"])
-    
+
     if deporte is None:
         return None, "El deporte no existe", 404
-    
+
     create_cancha(data)
     return None, None, 201
 
@@ -58,4 +58,3 @@ def delete_cancha_service(id_cancha):
     delete_cancha(id_cancha)
     return None, 204
 
-    

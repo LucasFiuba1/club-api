@@ -16,7 +16,7 @@ VALUES
 
 CREATE TABLE canchas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL, 
+    nombre VARCHAR(50) NOT NULL,
     id_deporte INT NOT NULL,
     precio_hora INT NOT NULL,
     techada BOOLEAN NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE canchas (
 CREATE TABLE socios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(250) NOT NULL UNIQUE, 
+    email VARCHAR(250) NOT NULL UNIQUE,
     activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 

@@ -22,7 +22,7 @@ CAMPOS_PERMITIDOS_PATCH = {
 def validate_create_cancha(data):
     if type(data) != dict:
         return False, "Los datos deben ser un diccionario."
-    
+
     for campo in CAMPOS_OBLIGATORIOS:
         if campo not in data:
             return False, "Falta un campo obligatorio."
@@ -58,7 +58,7 @@ def validate_create_cancha(data):
             return False, "El campo 'activa' debe ser true o false."
 
     return True, None
-    
+
 
 def validate_patch_cancha(data):
 
