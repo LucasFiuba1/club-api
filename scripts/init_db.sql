@@ -63,3 +63,40 @@ VALUES
         ('Roman', 'roman@gmail.com', TRUE),
         ('Sergio', 'sergio@gmail.com', TRUE)
     );
+
+-----------------    
+/* RESERVAS */
+CREATE TABLE
+    reservas (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        id_socio INT PRIMARY KEY AUTO_INCREMENT,
+        id_cancha INT PRIMARY KEY AUTO_INCREMENT,
+        fecha_hora_inicio DATETIME NOT NULL,
+        fecha_hora_fin DATETIME NOT NULL,
+        estado VARCHAR(20) NOT NULL DEFAULT 'confirmada',
+        tarifa_hora INT NOT NULL,
+        total INT NOT NULL,
+        FOREIGN KEY (id_socio) REFERENCES socios (id),
+        FOREIGN KEY (id_cancha) REFERENCES canchas (id)
+    );
+
+INSERT INTO
+    reservas (
+        id_socio,
+        id_cancha,
+        fecha_hora_inicio,
+        fecha_hora_fin,
+        estado,
+        tarifa_hora,
+        total
+    )
+VALUES
+    (
+        1,
+        1,
+        '2026-10-15 18:00:00',
+        '2026-10-15 20:00:00',
+        'confirmada',
+        1000000,
+        2000000
+    );
