@@ -18,7 +18,6 @@ VALUES
     ('Tenis'),
     ('Pádel');
 
------------------
 /* CANCHAS */
 CREATE TABLE
     canchas (
@@ -39,7 +38,6 @@ VALUES
     ('Cancha de Pádel 3', 3, 700000, TRUE, TRUE),
     ('Cancha de Pádel 4', 3, 650000, FALSE, FALSE);
 
------------------    
 /* SOCIOS */
 CREATE TABLE
     socios (
@@ -62,7 +60,6 @@ VALUES
     ('Roman', 'roman@gmail.com', TRUE),
     ('Sergio', 'sergio@gmail.com', TRUE);
 
------------------    
 /* RESERVAS */
 CREATE TABLE
     reservas (
