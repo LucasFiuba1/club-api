@@ -3,7 +3,7 @@ from services.canchas.cancha_service import create_cancha_service, patch_cancha_
 
 cancha_routes = Blueprint("canchas", __name__, url_prefix="/canchas")
 
-@cancha_routes.post("/")
+@cancha_routes.post("")
 def create_cancha_route():
     data = request.get_json(silent=True)
 

@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify
+
 from routes.canchas.cancha_routes import cancha_routes
 from routes.socios.socio_routes import socio_routes
-
+from utils.error_utils import build_error
 
 
 def create_app():
@@ -10,6 +11,18 @@ def create_app():
     app.register_blueprint(socio_routes)
     app.register_blueprint(cancha_routes)
 
+    @app.errorhandler(500)
+    def handle_internal_server_error(error):
+        return (
+            jsonify(
+                build_error(
+                    "ERROR_INTERNO",
+                    "Error interno del servidor",
+                    "Ocurrio un error interno en el servidor",
+                )
+            ),
+            500,
+        )
     return app
 
 
