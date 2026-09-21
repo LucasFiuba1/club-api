@@ -20,26 +20,24 @@ def create_cancha(data):
     connection = get_connection()
 
     try:
+        keys = []
+        values = []
+
+        for key, value in data.items():
+            keys.append(key)
+            values.append(value)
+
+        columns = ", ".join(keys)
+        placeholders = ", ".join(["%s"] * len(values))
+
         with connection.cursor() as cursor:
-            query = """
+            query = f"""
 
-                INSERT INTO canchas (
-                nombre, id_deporte, precio_hora, techada, activa
-            )
-            VALUES (%s, %s, %s, %s, %s)
-
+                INSERT INTO canchas ({columns})
+                VALUES ({placeholders})
             """
-            cursor.execute(
-                query,
-                (
-                    data["nombre"],
-                    data["id_deporte"],
-                    data["precio_hora"],
-                    data["techada"],
-                    data["activa"]
 
-                )
-            )
+            cursor.execute(query, values)
 
             cancha_id = cursor.lastrowid
 
