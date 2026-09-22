@@ -1,4 +1,5 @@
-from db.connection import get_connection
+from src.db.connection import get_connection
+
 
 def get_deporte_by_id(id_deporte):
     connection = get_connection()

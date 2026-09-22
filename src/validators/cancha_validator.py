@@ -49,13 +49,11 @@ def validate_create_cancha(data):
     if data["precio_hora"] <= 0:
         return False, "El campo 'precio_hora' debe ser un entero positivo."
 
-    if "techada" in data:
-        if type(data["techada"]) != bool:
-            return False, "El campo 'techada' debe ser true o false."
+    if "techada" in data and type(data["techada"]) != bool:
+        return False, "El campo 'techada' debe ser true o false."
 
-    if "activa" in data:
-        if type(data["activa"]) != bool:
-            return False, "El campo 'activa' debe ser true o false."
+    if "activa" in data and type(data["activa"]) != bool:
+        return False, "El campo 'activa' debe ser true o false."
 
     return True, None
 
@@ -86,12 +84,10 @@ def validate_patch_cancha(data):
         if data["precio_hora"] <= 0:
             return False, "El campo 'precio_hora' debe ser un entero positivo."
 
-    if "techada" in data:
-        if type(data["techada"]) != bool:
-            return False, "El campo 'techada' debe ser true o false."
+    if "techada" in data and type(data["techada"]) != bool:
+        return False, "El campo 'techada' debe ser true o false."
 
-    if "activa" in data:
-        if type(data["activa"]) != bool:
-            return False, "El campo 'activa' debe ser true o false."
+    if "activa" in data and type(data["activa"]) != bool:
+        return False, "El campo 'activa' debe ser true o false."
 
     return True, None

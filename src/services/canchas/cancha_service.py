@@ -1,4 +1,4 @@
-from repositories.canchas.cancha_repository import (
+from src.repositories.canchas.cancha_repository import (
     create_cancha,
     delete_cancha,
     get_cancha_by_id,
@@ -6,9 +6,11 @@ from repositories.canchas.cancha_repository import (
     get_reserva_by_cancha,
     update_cancha,
 )
-from utils.error_utils import build_error
-from validators.cancha_validator import validate_create_cancha, validate_patch_cancha
-
+from src.utils.error_utils import build_error
+from src.validators.cancha_validator import (
+    validate_create_cancha,
+    validate_patch_cancha,
+)
 
 
 def create_cancha_service(data):

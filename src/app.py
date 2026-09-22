@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 
 from src.routes.canchas.cancha_routes import cancha_routes
-from src.utils.error_utils import build_error
 from src.routes.socios.socio_routes import socio_routes
+from src.utils.error_utils import build_error
 
 
 def create_app():
