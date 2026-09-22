@@ -3,13 +3,12 @@ from urllib.parse import urlencode
 from src.repositories.canchas.cancha_repository import (
     create_cancha,
     delete_cancha,
-    get_all_deportes,
     get_cancha_by_id,
     get_canchas,
-    get_deporte_by_id,
     get_reserva_by_cancha,
     update_cancha,
 )
+
 from src.utils.error_utils import build_error
 from src.validators.cancha_validator import (
     validate_cancha_id,
@@ -19,9 +18,7 @@ from src.validators.cancha_validator import (
 )
 
 
-def get_deportes_service():
-    deportes = get_all_deportes()
-    return deportes, None, 200
+
 
 
 def get_cancha_service(cancha_id):
