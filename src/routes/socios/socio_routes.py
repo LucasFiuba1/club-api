@@ -25,3 +25,33 @@ def update_socio_route(socio_id):
         return jsonify(error), status
 
     return "", status
+
+from services.socios.socio_service import (
+    create_socio_service,
+    get_socios_service,
+)
+
+
+@socio_routes.route("", methods=["GET"])
+def get_socios_route():
+    socios, error, status = get_socios_service(
+        request.base_url,
+        request.args
+    )
+
+    if error:
+        return jsonify(error), status
+
+    return jsonify(socios), status
+
+
+@socio_routes.route("", methods=["POST"])
+def create_socio_route():
+    data = request.get_json(silent=True)
+
+    error, status = create_socio_service(data)
+
+    if error:
+        return jsonify(error), status
+
+    return "", status

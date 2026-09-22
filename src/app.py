@@ -1,6 +1,6 @@
 from flask import Flask
 
-from routes.socios import socio_routes
+from routes.socios.socio_routes import socio_routes
 
 
 def create_app():
