@@ -1,8 +1,8 @@
 from flask import Flask
 
-from routes.socios import socio_routes
-from routes.canchas import cancha_routes
-from routes.deportes import deporte_routes
+from src.routes.canchas import cancha_routes
+from src.routes.deportes import deporte_routes
+from src.routes.socios.socio_routes import socio_routes
 
 def create_app():
     app = Flask(__name__)
