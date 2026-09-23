@@ -1,7 +1,5 @@
 DROP DATABASE IF EXISTS club_deportivo;
 
-CREATE DATABASE IF NOT EXISTS club_deportivo;
-
 USE club_deportivo;
 
 /* DEPORTES */
@@ -10,14 +8,12 @@ CREATE TABLE
         id INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(50) NOT NULL UNIQUE
     );
-
 INSERT INTO
     deportes (nombre)
 VALUES
     ('Fútbol'),
     ('Tenis'),
     ('Pádel');
-
 /* CANCHAS */
 CREATE TABLE
     canchas (
@@ -29,7 +25,6 @@ CREATE TABLE
         activa BOOLEAN NOT NULL DEFAULT TRUE,
         FOREIGN KEY (id_deporte) REFERENCES deportes (id)
     );
-
 INSERT INTO
     canchas (nombre, id_deporte, precio_hora, techada, activa)
 VALUES
@@ -37,7 +32,6 @@ VALUES
     ('Cancha de Tenis 2', 2, 500000, FALSE, TRUE),
     ('Cancha de Pádel 3', 3, 700000, TRUE, TRUE),
     ('Cancha de Pádel 4', 3, 650000, FALSE, FALSE);
-
 /* SOCIOS */
 CREATE TABLE
     socios (
@@ -46,7 +40,6 @@ CREATE TABLE
         email VARCHAR(100) NOT NULL UNIQUE,
         activo BOOLEAN NOT NULL DEFAULT TRUE
     );
-
 INSERT INTO
     socios (nombre, email, activo)
 VALUES
@@ -59,7 +52,6 @@ VALUES
     ('Mateo', 'mateo@gmail.com', FALSE),
     ('Roman', 'roman@gmail.com', TRUE),
     ('Sergio', 'sergio@gmail.com', TRUE);
-
 /* RESERVAS */
 CREATE TABLE
     reservas (
@@ -74,7 +66,6 @@ CREATE TABLE
         FOREIGN KEY (id_socio) REFERENCES socios (id),
         FOREIGN KEY (id_cancha) REFERENCES canchas (id)
     );
-
 INSERT INTO
     reservas (
         id_socio,
