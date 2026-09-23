@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from services.socios.socio_service import get_socio, update_socio_service
+from src.services.socios.socio_service import get_socio, update_socio_service
 
 socio_routes = Blueprint("socios", __name__, url_prefix="/socios")
 

@@ -1,11 +1,11 @@
-from db.connection import get_connection
+from src.db.connection import get_connection
 
 
 def get_socio_by_id(socio_id):
     connection = get_connection()
 
     try:
-        with connection.cursor() as cursor:
+        with connection.cursor(dictionary=True) as cursor:
 
             query = """
                 SELECT id, email, nombre, activo 
@@ -24,7 +24,7 @@ def get_socio_by_email(socio_email):
     connection = get_connection()
 
     try:
-        with connection.cursor() as cursor:
+        with connection.cursor(dictionary=True) as cursor:
 
             query = """
                 SELECT id, email, nombre, activo 
@@ -50,7 +50,7 @@ def update_socio(socio_id, data):
             keys.append(f"{key} = %s")
             values.append(value)
 
-        with connection.cursor() as cursor:
+        with connection.cursor(dictionary=True) as cursor:
 
             query = f"""
                 UPDATE socios 

@@ -2,19 +2,19 @@ from urllib.parse import urlencode
 
 from mysql.connector import IntegrityError
 
-from repositories.socios.socio_repository import (
+from src.repositories.socios.socio_repository import (
     create_socio,
     get_socio_by_email,
     get_socio_by_id,
     get_socios,
     update_socio,
 )
-from utils.error_utils import build_error, socio_not_found_error
 from validators.socio_validator import (
     validate_create_socio,
     validate_socios_query_params,
     validate_update_socio,
 )
+from src.utils.error_utils import build_error, socio_not_found_error
 
 
 def get_socio(socio_id):
@@ -30,13 +30,12 @@ def update_socio_service(socio_id, data):
     socio = get_socio_by_id(socio_id)
 
     if socio is None:
-        return None, socio_not_found_error(socio_id), 404
+        return socio_not_found_error(socio_id), 404
 
     valid, error = validate_update_socio(data)
 
     if not valid:
         return (
-            None,
             build_error(
                 "ERRO_VALIDACION",
                 "El cuerpo de la solicitud es invalido.",
@@ -55,7 +54,6 @@ def update_socio_service(socio_id, data):
 
         if socio_with_email is not None and socio_with_email["id"] != socio_id:
             return (
-                None,
                 build_error(
                     "EMAIL_YA_REGISTRADO",
                     "Email ya registrado.",
