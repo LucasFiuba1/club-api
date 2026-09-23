@@ -1,61 +1,88 @@
-CREATE DATABASE IF NOT EXISTS club_deportivo;
+DROP DATABASE IF EXISTS club_deportivo;
 
 USE club_deportivo;
 
-CREATE TABLE IF NOT EXISTS deportes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS socios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(250) NOT NULL UNIQUE,
-    activo BOOLEAN NOT NULL DEFAULT TRUE
-);
-
-CREATE TABLE IF NOT EXISTS canchas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    id_deporte INT NOT NULL,
-    precio_hora INT NOT NULL,
-    techada BOOLEAN NOT NULL,
-    activa BOOLEAN NOT NULL,
-    FOREIGN KEY (id_deporte) REFERENCES deportes(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS reservas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_socio INT NOT NULL,
-    id_cancha INT NOT NULL,
-    fecha_hora_inicio DATETIME(6) NOT NULL,
-    fecha_hora_fin DATETIME(6) NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'confirmada',
-    precio_hora INT NOT NULL,
-    precio_total INT NOT NULL,
-    FOREIGN KEY (id_cancha) REFERENCES canchas(id),
-    FOREIGN KEY (id_socio) REFERENCES socios(id)
-);
-
-INSERT INTO deportes (nombre)
-VALUES 
-    ('Futbol'),
-    ('Padel'),
-    ('Tenis');
-
-INSERT INTO canchas (nombre, id_deporte, precio_hora, techada, activa)
+/* DEPORTES */
+CREATE TABLE
+    deportes (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nombre VARCHAR(50) NOT NULL UNIQUE
+    );
+INSERT INTO
+    deportes (nombre)
 VALUES
-    ('Cancha 1 - Futbol 5', 1, 1000000, FALSE, TRUE),
-    ('Cancha 2 - Padel', 2, 1200000, TRUE, TRUE),
-    ('Cancha 3 - Tenis', 3, 1250000, FALSE, FALSE);
-
-INSERT INTO socios (nombre, email, activo)
+    ('Fútbol'),
+    ('Tenis'),
+    ('Pádel');
+/* CANCHAS */
+CREATE TABLE
+    canchas (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nombre VARCHAR(100) NOT NULL UNIQUE,
+        id_deporte INT NOT NULL,
+        precio_hora INT NOT NULL,
+        techada BOOLEAN NOT NULL DEFAULT FALSE,
+        activa BOOLEAN NOT NULL DEFAULT TRUE,
+        FOREIGN KEY (id_deporte) REFERENCES deportes (id)
+    );
+INSERT INTO
+    canchas (nombre, id_deporte, precio_hora, techada, activa)
 VALUES
-    ('Juan Perez', 'juanpe@ejemplo.com', TRUE),
-    ('Alberto Carlos', 'beto@ejemplo.com', FALSE),
-    ('Diego Ruiz', 'dieguito5@ejemplo.com', TRUE);
-
-INSERT INTO reservas(id_cancha, id_socio, fecha_hora_inicio, fecha_hora_fin, estado, precio_hora, precio_total)
+    ('Cancha de fútbol 1', 1, 1000000, FALSE, TRUE),
+    ('Cancha de Tenis 2', 2, 500000, FALSE, TRUE),
+    ('Cancha de Pádel 3', 3, 700000, TRUE, TRUE),
+    ('Cancha de Pádel 4', 3, 650000, FALSE, FALSE);
+/* SOCIOS */
+CREATE TABLE
+    socios (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nombre VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        activo BOOLEAN NOT NULL DEFAULT TRUE
+    );
+INSERT INTO
+    socios (nombre, email, activo)
 VALUES
-    (1, 1, '2026-10-15 18:00:00.000000', '2026-10-15 20:00:00.000000', 'confirmada', 1000000, 2000000);
+    (
+        'Lucas Cirillo Berardi',
+        'lucascirilloberardi@gmail.com',
+        TRUE
+    ),
+    ('Joaquin', 'joaquin@gmail.com', TRUE),
+    ('Mateo', 'mateo@gmail.com', FALSE),
+    ('Roman', 'roman@gmail.com', TRUE),
+    ('Sergio', 'sergio@gmail.com', TRUE);
+/* RESERVAS */
+CREATE TABLE
+    reservas (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        id_socio INT NOT NULL,
+        id_cancha INT NOT NULL,
+        fecha_hora_inicio DATETIME (6) NOT NULL,
+        fecha_hora_fin DATETIME (6) NOT NULL,
+        estado VARCHAR(20) NOT NULL DEFAULT 'confirmada',
+        tarifa_hora INT NOT NULL,
+        total INT NOT NULL,
+        FOREIGN KEY (id_socio) REFERENCES socios (id),
+        FOREIGN KEY (id_cancha) REFERENCES canchas (id)
+    );
+INSERT INTO
+    reservas (
+        id_socio,
+        id_cancha,
+        fecha_hora_inicio,
+        fecha_hora_fin,
+        estado,
+        tarifa_hora,
+        total
+    )
+VALUES
+    (
+        1,
+        1,
+        '2026-10-15 18:00:00.121000',
+        '2026-10-15 20:00:00.121000',
+        'confirmada',
+        1000000,
+        2000000
+    );
