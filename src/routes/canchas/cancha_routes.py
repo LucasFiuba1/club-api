@@ -47,7 +47,7 @@ def get_canchas_disponibles_route():
     return jsonify({"canchas": canchas}), status
 
 
-@cancha_routes.get("/<int:cancha_id>")
+@cancha_routes.get("/<int:cancha_id>", METHODS=['GET'])
 def get_cancha_route(cancha_id):
     cancha, error, status = get_cancha_service(cancha_id)
 
@@ -82,7 +82,7 @@ def create_cancha_route():
     return "", status
 
 
-@cancha_routes.patch("/<int:id_cancha>")
+@cancha_routes.patch("/<int:id_cancha>", METHODS=['PATCH'])
 def patch_cancha_route(id_cancha):
     data = request.get_json(silent=True)
 
@@ -94,7 +94,7 @@ def patch_cancha_route(id_cancha):
     return "", status
 
 
-@cancha_routes.delete("/<int:id_cancha>")
+@cancha_routes.delete("/<int:id_cancha>", METHODS = ['DELETE'])
 def delete_cancha_route(id_cancha):
     error, status = delete_cancha_service(id_cancha)
 

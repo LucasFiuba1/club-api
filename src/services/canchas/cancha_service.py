@@ -4,20 +4,21 @@ from urllib.parse import urlencode
 from src.repositories.canchas.cancha_repository import (
     create_cancha,
     delete_cancha,
-    get_all_deportes,
     get_cancha_by_id,
     get_canchas,
-    get_canchas_disponibles,
-    get_deporte_by_id,
     get_reserva_by_cancha,
     update_cancha,
+    get_canchas_disponibles,
+    get_reserva_by_cancha,
 )
+
 from src.utils.error_utils import (
     build_error,
     invalid_reservation_duration_error,
     time_not_top_of_hour_error,
     time_out_of_range_error,
 )
+
 from src.validators.cancha_validator import (
     validate_cancha_id,
     validate_canchas_query_params,
@@ -52,9 +53,7 @@ def get_canchas_disponibles_service(fecha, hora_inicio, hora_fin, id_deporte=Non
 
 
 
-def get_deportes_service():
-    deportes = get_all_deportes()
-    return deportes, None, 200
+
 
 
 def get_cancha_service(cancha_id):
