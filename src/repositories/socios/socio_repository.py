@@ -5,7 +5,7 @@ def get_socio_by_id(socio_id):
     connection = get_connection()
 
     try:
-        with connection.cursor() as cursor:
+        with connection.cursor(dictonary=True) as cursor:
 
             query = """
                 SELECT id, email, nombre, activo 
