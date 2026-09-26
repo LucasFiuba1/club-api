@@ -53,13 +53,11 @@ def validate_disponibilidad(data):
         if not is_valid_time(data[campo]):
             return False, f"El campo {campo} no tiene un formato válido."
 
-    if "id_deporte" in data:
-        if not isinstance(data["id_deporte"], int):
-            return False, "El campo id_deporte debe ser un número entero."
+    if "id_deporte" in data and not isinstance(data["id_deporte"], int):
+        return False, "El campo id_deporte debe ser un número entero."
 
-    if "techada" in data:
-        if not isinstance(data["techada"], bool):
-            return False, "El campo techada debe ser True o False."
+    if "techada" in data and not isinstance(data["techada"], bool):
+        return False, "El campo techada debe ser True o False."
     return True, None
 
 def is_valid_date(fecha):
