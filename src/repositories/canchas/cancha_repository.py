@@ -1,5 +1,6 @@
 from src.db.connection import get_connection
 
+
 def get_canchas_disponibles(fecha, hora_inicio, hora_fin, id_deporte=None, techada=None):
     connection=get_connection()
 

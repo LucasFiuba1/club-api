@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 
 from src.services.canchas.cancha_service import get_deportes_service
 

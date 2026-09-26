@@ -9,12 +9,12 @@ from src.repositories.socios.socio_repository import (
     get_socios,
     update_socio,
 )
+from src.utils.error_utils import build_error, socio_not_found_error
 from validators.socio_validator import (
     validate_create_socio,
     validate_socios_query_params,
     validate_update_socio,
 )
-from src.utils.error_utils import build_error, socio_not_found_error
 
 
 def get_socio(socio_id):
