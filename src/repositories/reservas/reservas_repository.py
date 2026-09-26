@@ -1,4 +1,4 @@
-from db.connection import get_connection
+from src.db.connection import get_connection
 
 
 def get_reservas_db(filters, limit, offset):

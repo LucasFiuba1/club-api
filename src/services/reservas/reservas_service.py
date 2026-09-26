@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from repositories.reservas.reservas_repository import (
+from src.repositories.reservas.reservas_repository import (
     get_reserva_by_id,
     get_reservas_db,
     update_estado_db,

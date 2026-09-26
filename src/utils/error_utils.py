@@ -73,3 +73,10 @@ def reserva_not_future_error(fecha_hora_inicio):
         "El inicio de la reserva debe ser posterior al momento actual.",
         f"La fecha y la hora de inicio {fecha_hora_inicio} ya pasó o es el momento actual."
     )
+
+def reserva_overlap_socio_error(id_socio, fecha, hora_inicio, hora_fin):
+    return build_error(
+        "SUPERPOSICION_RESERVA_SOCIO",
+        "El socio ya tiene una reserva confirmada en ese horario",
+        f"El socio {id_socio} ya tiene una reserva confirmada que se superpone con el horario {hora_inicio}-{hora_fin} del día {fecha}",
+    )

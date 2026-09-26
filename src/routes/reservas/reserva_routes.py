@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 
-from services.reservas.reserva_service import create_reserva_service
-from validators.reserva_validator import validate_reserva
-from utils.error_utils import build_error
+from src.services.reservas.reserva_service import create_reserva_service
+from src.utils.error_utils import build_error
+from src.validators.reserva_validator import validate_reserva
 
 reserva_routes=Blueprint("reservas", __name__, url_prefix="/reservas")
 
