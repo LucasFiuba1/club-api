@@ -1,22 +1,22 @@
 from datetime import datetime, time, timedelta, timezone
 
-from repositories.canchas.cancha_repository import get_cancha_by_id
-from repositories.reservas.reserva_repository import (
+from src.repositories.canchas.cancha_repository import get_cancha_by_id
+from src.repositories.reservas.reserva_repository import (
     create_reserva,
     existe_superposicion,
-)
-from repositories.socios.socio_repository import get_socio_by_id
-from src.repositories.reservas.reserva_repository import (
+    existe_superposicion_socio,
     get_reserva_by_id,
     get_reservas_db,
     update_estado_db,
 )
-from utils.error_utils import (
+from src.repositories.socios.socio_repository import get_socio_by_id
+from src.utils.error_utils import (
     cancha_inactive_error,
     cancha_not_found_error,
     cancha_overlap_error,
     invalid_reservation_duration_error,
     reserva_not_future_error,
+    reserva_overlap_socio_error,
     socio_inactive_error,
     socio_not_found_error,
     time_not_top_of_hour_error,
@@ -131,8 +131,16 @@ def create_reserva_service(id_socio, id_cancha, fecha_hora_inicio, fecha_hora_fi
     if existe_superposicion(id_cancha, fecha, hora_inicio, hora_fin):
         return None, cancha_overlap_error(id_cancha, fecha, hora_inicio, hora_fin), 409
 
+    if existe_superposicion_socio(id_socio, fecha, hora_inicio, hora_fin):
+        return (
+            None,
+            reserva_overlap_socio_error(id_socio, fecha, hora_inicio, hora_fin),
+            409,
+        )
+
     precio_hora = cancha["precio_hora"]
     precio_total = precio_hora * duracion_horas
+
     reserva_id = create_reserva(
         id_socio,
         id_cancha,
@@ -152,4 +160,5 @@ def create_reserva_service(id_socio, id_cancha, fecha_hora_inicio, fecha_hora_fi
         "precio_hora": precio_hora,
         "precio_total": precio_total,
     }
+
     return reserva_creada, None, 201
