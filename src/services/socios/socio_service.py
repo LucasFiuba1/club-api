@@ -10,7 +10,7 @@ from src.repositories.socios.socio_repository import (
     update_socio,
 )
 from src.utils.error_utils import build_error, socio_not_found_error
-from validators.socio_validator import (
+from src.validators.socio_validator import (
     validate_create_socio,
     validate_socios_query_params,
     validate_update_socio,

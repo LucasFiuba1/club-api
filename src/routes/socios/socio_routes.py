@@ -1,6 +1,11 @@
 from flask import Blueprint, jsonify, request
 
-from src.services.socios.socio_service import get_socio, update_socio_service
+from src.services.socios.socio_service import (
+    create_socio_service,
+    get_socio,
+    get_socios_service,
+    update_socio_service,
+)
 
 socio_routes = Blueprint("socios", __name__, url_prefix="/socios")
 
@@ -26,18 +31,10 @@ def update_socio_route(socio_id):
 
     return "", status
 
-from services.socios.socio_service import (
-    create_socio_service,
-    get_socios_service,
-)
-
 
 @socio_routes.route("", methods=["GET"])
 def get_socios_route():
-    socios, error, status = get_socios_service(
-        request.base_url,
-        request.args
-    )
+    socios, error, status = get_socios_service(request.base_url, request.args)
 
     if error:
         return jsonify(error), status

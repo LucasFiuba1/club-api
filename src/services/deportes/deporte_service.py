@@ -2,8 +2,8 @@ from src.repositories.deportes.deporte_repository import (
     get_all_deportes,
     get_deporte_by_id,
 )
-from utils.error_utils import build_error
-from validators.deporte_validator import validate_deporte_id
+from src.utils.error_utils import build_error
+from src.validators.deporte_validator import validate_deporte_id
 
 
 def get_deportes_service():
