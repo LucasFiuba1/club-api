@@ -1,16 +1,22 @@
+from datetime import datetime, time, timedelta, timezone
 from urllib.parse import urlencode
 
 from src.repositories.canchas.cancha_repository import (
     create_cancha,
     delete_cancha,
-    get_all_deportes,
     get_cancha_by_id,
     get_canchas,
-    get_deporte_by_id,
+    get_canchas_disponibles,
     get_reserva_by_cancha,
     update_cancha,
 )
-from src.utils.error_utils import build_error
+from src.repositories.deportes.deporte_repository import get_deporte_by_id
+from src.utils.error_utils import (
+    build_error,
+    invalid_reservation_duration_error,
+    time_not_top_of_hour_error,
+    time_out_of_range_error,
+)
 from src.validators.cancha_validator import (
     validate_cancha_id,
     validate_canchas_query_params,
@@ -18,10 +24,35 @@ from src.validators.cancha_validator import (
     validate_patch_cancha,
 )
 
+GMT3 = timezone(timedelta(hours=-3))
 
-def get_deportes_service():
-    deportes = get_all_deportes()
-    return deportes, None, 200
+
+def get_canchas_disponibles_service(
+    fecha, hora_inicio, hora_fin, id_deporte=None, techada=None
+):
+
+    hora_inicio_obj = datetime.strptime(hora_inicio, "%H:%M:%S").replace(tzinfo=GMT3)
+    hora_fin_obj = datetime.strptime(hora_fin, "%H:%M:%S").replace(tzinfo=GMT3)
+    duracion_reserva = hora_fin_obj - hora_inicio_obj
+
+    if hora_inicio_obj.minute != 0 or hora_inicio_obj.second != 0:
+        return None, time_not_top_of_hour_error(hora_inicio), 400
+    if hora_fin_obj.minute != 0 or hora_fin_obj.second != 0:
+        return None, time_not_top_of_hour_error(hora_fin), 400
+
+    if hora_inicio_obj.time() < time(8, 0, 0) or hora_inicio_obj.time() > time(
+        23, 0, 0
+    ):
+        return None, time_out_of_range_error(hora_inicio), 400
+    if hora_fin_obj.time() < time(8, 0, 0) or hora_fin_obj.time() > time(23, 0, 0):
+        return None, time_out_of_range_error(hora_fin), 400
+
+    duracion_horas = duracion_reserva.total_seconds() / 3600
+    if duracion_horas < 1 or duracion_horas > 3:
+        return None, invalid_reservation_duration_error(duracion_horas), 400
+
+    canchas = get_canchas_disponibles(fecha, hora_inicio, hora_fin, id_deporte, techada)
+    return canchas, None, 200
 
 
 def get_cancha_service(cancha_id):
