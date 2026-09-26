@@ -12,7 +12,7 @@ from src.validators.reserva_validator import validate_reserva
 reserva_routes = Blueprint("reservas", __name__, url_prefix="/reservas")
 
 
-@reserva_routes.route("/reservas", methods=["GET"])
+@reserva_routes.route("/", methods=["GET"])
 def get_reserva():
 
     limit = int(request.args.get("_limit", 10))
@@ -42,7 +42,7 @@ def get_reserva():
     return jsonify({"reservas": reservas, "_links": links}), 200
 
 
-@reserva_routes.route("/reservas/<int:reserva_id>", methods=["GET"])
+@reserva_routes.route("/<int:reserva_id>", methods=["GET"])
 def get_reserva_by_id(reserva_id):
     reserva = obtener_reserva(reserva_id)
     if not reserva:
@@ -74,7 +74,7 @@ def create_reserva_route():
     return jsonify(reserva), status
 
 
-@reserva_routes.route("/reservas/<int:reserva_id>/estado", methods=["PUT"])
+@reserva_routes.route("/<int:reserva_id>/estado", methods=["PUT"])
 def update_estado(reserva_id):
     """
     Endpoint paraactualizar el estado de una reserva por su ID
