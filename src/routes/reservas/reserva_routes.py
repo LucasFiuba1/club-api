@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from src.services.reservas.reservas_service import (
+from src.services.reservas.reserva_service import (
     cambiar_estado_reserva,
     create_reserva_service,
     listar_reservas,
